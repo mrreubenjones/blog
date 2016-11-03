@@ -1,0 +1,9 @@
+<h1><%= @post.title %></h1>
+<p><%= @post.body %></p>
+
+<h2>Comments</h2>
+
+<%= form_for [@question, @comment] do |f| %>
+<%= f.text_field : %>
+
+<% end %>

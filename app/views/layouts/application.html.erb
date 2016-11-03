@@ -5,17 +5,23 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application',
+'https://fonts.googleapis.com/css?family=Bungee+Hairline|Raleway',
+ media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <nav>
-      <%= link_to 'Home', root_path %>
-      <%= link_to 'About', about_path %>
-    </nav>
-    <div class="container">
-        <%= yield %>
-    </div>
+    <div class="background-img">
 
+
+      <div class="container <%= @container %>">
+        <nav>
+          <%= link_to 'TIL', root_path %>&middot;
+          <%= link_to 'About', about_path %>
+        </nav>
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
