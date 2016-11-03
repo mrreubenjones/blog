@@ -1,0 +1,22 @@
+
+
+<h1>Today I Learned</h1>
+<div class="post-form-container">
+
+
+<%= form_for @post do |f| %>
+<%= f.text_field :title, placeholder: 'Title', class: 'text-field' %><br />
+<%= f.text_area :body, placeholder: 'Body', class: 'text-area' %><br />
+<%= f.submit %><br />
+<%= @post.errors.full_messages.join(', ') %>
+<% end %>
+</div>
+
+<% @posts.each do |p| %>
+  <div class="post-container">
+    <h3><%= p.title %></h3>
+    <%= p.created_at.to_date %><br />
+    <%#= p.user %>
+    <%= p.body.truncate_words(20) %><br />
+  </div>
+<% end %>
