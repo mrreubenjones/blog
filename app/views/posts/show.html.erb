@@ -2,8 +2,7 @@
 <p><%= @post.body %></p>
 
 <h2>Comments</h2>
-
-<%= form_for [@question, @comment] do |f| %>
-<%= f.text_field : %>
-
+<% form_for [@post, @comment] do |f| %>
+  <%= f.text_field :body %>
+  <%= f.submit 'Comment' %>
 <% end %>

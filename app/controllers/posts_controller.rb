@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user, except: [:index, :show]
+
 
   def index
     @container = "posts"
     @posts = Post.order(created_at: :desc)
-    # @body = self.snippet(50)
     @post = Post.new
-
   end
 
   def new
@@ -15,10 +15,9 @@ class PostsController < ApplicationController
     post_params = params.require(:post).permit([:title, :body])
     @post = Post.new post_params
     if @post.save
-      redirect_to post_path(@post)
+      redirect_to root_path
     else
       flash.now[:alert] = @post.errors.full_messages.join(", ")
-      # Tried to render below, but then I get an error with the posts list
       redirect_to root_path
     end
   end

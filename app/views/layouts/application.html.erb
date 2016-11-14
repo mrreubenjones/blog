@@ -18,10 +18,18 @@
       <div class="container <%= @container %>">
         <nav>
           <%= link_to 'TIL', root_path %>&middot;
-          <%= link_to 'About', about_path %>
+          <%= link_to 'About', about_path %>&middot;
+          <% if user_signed_in? %>
+              Hello <%= current_user.first_name %>,
+              <%= link_to "Logout", sessions_path, method: :delete %>
+            <% else %>
+              <%= link_to "Login", new_session_path %>&middot;
+              <%= link_to "Sign Up", new_user_path %>
+            <% end %>
         </nav>
         <%= yield %>
       </div>
     </div>
   </body>
 </html>
+
