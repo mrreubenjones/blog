@@ -1,8 +1,25 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.body %></p>
 
+<% if can? :edit, @post %>
+  <%= link_to "Edit", edit_post_path(@post) %>
+<% end %>
+<% if can? :destroy, @post %>
+  <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+<% end %>
+
 <h2>Comments</h2>
-<% form_for [@post, @comment] do |f| %>
-  <%= f.text_field :body %>
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.text_area :body %><br />
   <%= f.submit 'Comment' %>
+<% end %>
+
+<hr />
+
+<% @comments.each do |c| %>
+  <%= c.body %>&nbsp;&mdash;<%= c.first_name %>&nbsp;
+  <% if can? :destroy, c %>
+    <%= link_to "Delete", comment_path(c), method: :delete %>
+  <% end %>
+  <hr />
 <% end %>
