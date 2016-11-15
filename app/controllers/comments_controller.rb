@@ -1,13 +1,17 @@
 class CommentsController < ApplicationController
 
-  # before_action :authenticate_user!
+  before_action :authenticate_user
+
+  def new
+    @comment = Comment.new
+  end
 
   def create
     @post             = Post.find params[:post_id]
     comment_params    = params.require(:comment).permit(:body)
     @comment          = Comment.new comment_params
     @comment.post     = @post
-    # @comment.user_id  = current_user.id
+    @comment.user_id  = current_user.id
     if @comment.save
       redirect_to post_path(@post), notice: "Comment created"
     else
@@ -24,7 +28,7 @@ class CommentsController < ApplicationController
       # else
         # redirect_to idea_path(idea), alert: 'Comment not deleted. Access denied'
       # end
-    end
+    # end
   end
 
 

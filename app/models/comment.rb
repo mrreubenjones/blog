@@ -7,4 +7,8 @@ class Comment < ApplicationRecord
                    uniqueness: { scope: :post }
 
 
+  def first_name
+    user ? user.first_name : "Anonymous"
+  end
+
 end

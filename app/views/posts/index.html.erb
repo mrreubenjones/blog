@@ -1,15 +1,23 @@
 
 
 <h1>Today I Learned</h1>
+
+<div class="search">
+  <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
+    <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+    <%= submit_tag "Search" %>
+  <% end %>
+</div>
+
 <div class="post-form-container">
 
 
-<%= form_for @post do |f| %>
-<%= f.text_field :title, placeholder: 'Title', class: 'text-field' %><br />
-<%= f.text_area :body, placeholder: 'Body', class: 'text-area' %><br />
-<%= f.submit %><br />
-<%= @post.errors.full_messages.join(', ') %>
-<% end %>
+  <%= form_for @post do |f| %>
+  <%= f.text_field :title, placeholder: 'Title', class: 'text-field' %><br />
+  <%= f.text_area :body, placeholder: 'Body', class: 'text-area' %><br />
+  <%= f.submit %><br />
+  <%= @post.errors.full_messages.join(', ') %>
+  <% end %>
 </div>
 
 <% @posts.each do |p| %>
