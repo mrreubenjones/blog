@@ -1,15 +1,11 @@
 class PostsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
+  before_action :authorize_access, only: [:edit, :update, :destroy]
+  before_action :initialize_paginated_search, only: [:index, :create]
 
   def index
     @container = "posts"
-    @posts = Post.order(created_at: :desc)
     @post = Post.new
-    if params[:search]
-      @posts = Post.search(params[:search]).order("created_at DESC")
-    else
-      @posts = Post.all.order('created_at DESC')
-    end
   end
 
   def new
@@ -17,12 +13,14 @@ class PostsController < ApplicationController
 
   def create
     post_params = params.require(:post).permit([:title, :body])
+
     @post = Post.new post_params
+    @post.user = current_user
     if @post.save
       redirect_to root_path
     else
       flash.now[:alert] = @post.errors.full_messages.join(", ")
-      redirect_to root_path
+      render :index
     end
   end
 
@@ -65,8 +63,20 @@ class PostsController < ApplicationController
     # end
   end
 
+private
 
+  def initialize_paginated_search
+    if params[:search]
+      @posts = Post.search(params[:search]).page(params[:page]).per(10).order("created_at DESC")
+    else
+      @posts = Post.all.page(params[:page]).per(10).order('created_at DESC')
+    end
+  end
 
-
+  def authorize_access
+    unless can? :manage, @post
+      redirect_to root_path, alert: 'Access denied'
+    end
+  end
 
 end
