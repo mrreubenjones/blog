@@ -2,6 +2,27 @@
 
 <h1>Today I Learned</h1>
 
+<% if @user = current_user %>
+  <div class="post-form-container">
+    <%= form_for(@post, remote: true) do |f| %>
+    <%= f.collection_select(
+        :category, Category.all, :id, :title, prompt: 'Select a category (required)' ) %>
+    <%= f.text_field :all_tags, placeholder: "Tags, separated with commas" %>
+    <%= f.text_field :title, placeholder: 'Title', class: 'text-field' %><br />
+    <%= f.text_area :body, placeholder: 'Body', class: 'text-area' %><br />
+    <%= f.file_field :image %><br />
+    <% if !@post.persisted? && current_user && current_user.signed_in_with_twitter? %>
+      <%= f.label :tweet_this do %>
+        <%= f.check_box :tweet_this %>
+        <span>Tweet this :)</span>
+      <% end %>
+    <% end %>
+    <%= f.submit %><br />
+    <%= @post.errors.full_messages.join(', ') %>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="search">
   <%= form_tag(posts_path, :method => "get", id: "search-form") do %>
     <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
@@ -9,23 +30,22 @@
   <% end %>
 </div>
 
-<div class="post-form-container">
-  <%= form_for @post do |f| %>
-  <%= f.text_field :title, placeholder: 'Title', class: 'text-field' %><br />
-  <%= f.text_area :body, placeholder: 'Body', class: 'text-area' %><br />
-  <%= f.submit %><br />
-  <%= @post.errors.full_messages.join(', ') %>
+<div id="all-posts">
+  <%#= render partial: @posts.reverse %>
+  <% @posts.each do |p| %>
+    <div class="post-container">
+      <%= image_tag p.image.url(thumb), class: 'thumbnail' if p.image.present? %>
+      <h3><%= link_to p.title, post_path(p) %></h3>
+      <%#= p.user.first_name %>
+      <%#= p.created_at.to_date %>
+      <%= time_ago_in_words(p.created_at)%> ago<br />
+      <%= p.body.truncate_words(20) %><br /><br />
+      <% if p.all_tags.present?  %>
+        Tags: <%=raw p.all_tags %>
+        <% end %>
+    </div>
   <% end %>
 </div>
-
-<% @posts.each do |p| %>
-  <div class="post-container">
-    <h3><%= link_to p.title, post_path(p) %></h3>
-    <%= p.created_at.to_date %><br />
-    <%#= p.user %>
-    <%= p.body.truncate_words(20) %><br />
-  </div>
-<% end %>
 
 <div class="pagination_group">
   <%= paginate @posts %>

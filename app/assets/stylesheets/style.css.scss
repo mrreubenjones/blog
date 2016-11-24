@@ -1,0 +1,262 @@
+// Shot at random bg images
+// $imgKey: random(4);
+// $list: bg_desktop_1, bg_shoes_1, bg_water_feet_1, bg_stadium_1;
+// $nth: nth($list, $imgKey);
+
+/*
+* Custom styles
+* Copyright 2016, Reuben Jones
+*
+*/
+
+/* Table of contents
+––––––––––––––––––––––––––––––––––––––––––––––––––
+
+- Base Styles
+- Grid
+- Content specific
+*/
+
+
+/* Base styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+body {
+  background-color: rgb(230, 97, 98);
+
+}
+
+h1 {
+  position: relative;
+  left: -15%;
+  padding: 0 0 0 15%;
+  display: inline;
+  background: rgba(253, 217, 2, 0.8);
+  font-family: 'Bungee Hairline', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.container {
+  margin: 10%;
+}
+
+
+
+/* Content specific
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+nav {
+  float: left;
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+}
+
+.search {
+  margin: 10px 0 0 0;
+  padding: 50px 50px 20px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #333;
+  }
+
+nav a {
+  font-family: 'Bungee Hairline', sans-serif;
+  font-size: 1.3em;
+  letter-spacing: 1px;
+  display: inline-block;
+  text-decoration: none;
+  color: #000;
+  font-weight: bold;
+  margin: 10px 10px 10px 5px;
+}
+
+nav a:hover {
+  color: #666;
+  font-weight: bolder;
+}
+
+.main-nav :first-child {
+  margin: 0 0 0 10px;
+}
+
+.utility-nav {
+  float:right;
+  margin: 10px;
+}
+
+.bg-1 {
+  background-image: url(bg_landscape_1.jpg);
+}
+
+.bg-2 {
+  background-image: url(bg_stadium_1.jpg);
+}
+
+.bg-3 {
+  background-image: url(bg_water_feet_1.jpg);
+}
+
+.bg-4 {
+  background-image: url(bg_stadium_1.jpg);
+}
+
+.bg-5 {
+  background-image: url(bg_landscape_1.jpg);
+}
+
+.bg-6 {
+  background-image: url(bg_landscape_2.jpg);
+}
+
+.bg-7 {
+  background-image: url(bg_water_1.jpg);
+}
+
+.background-img {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  border-bottom: dotted 20px rgb(230, 97, 98);
+  border-left: solid 0px rgb(230, 97, 98);
+  border-right: solid 0px rgb(230, 97, 98);
+  border-top: solid 5px rgb(230, 97, 98);
+  height: 100vh;
+}
+
+
+
+.post-form-container {
+  margin: 10px 0 0 0;
+  padding: 50px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #333;
+}
+
+.post-container {
+  margin: 10px 0 0 0;
+  padding: 50px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+}
+
+.post-show-container {
+  margin: 0;
+  padding: 50px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: #333;
+}
+
+
+.posts h2 {
+  font-family: 'Bungee Hairline', sans-serif;
+  margin: 0 0 0 50px;
+}
+
+.posts h3 {
+  font-size: 1.6em;
+  font-family: 'Bungee Hairline', sans-serif;
+  font-weight: bold;
+}
+
+.posts .text-field {
+  width: 100%;
+}
+
+.posts .text-area {
+  width: 100%;
+  height: 100px;
+}
+
+#post_all_tags {
+  width: 100%;
+}
+
+.pagination-group {
+  margin: 10px 0 0 0;
+  padding: 50px;
+  width: 60%;
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #333;
+}
+
+.thumbnail {
+  max-width: 50px;
+}
+
+/* Overwrite some skeleton.css styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #ccc;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: #333;
+  border-radius: 4px;
+  border: 1px solid #333;
+  cursor: pointer;
+  box-sizing: border-box; }
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: #fff;
+  border-color: #666;
+  outline: 0; }
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+  color: #FFF;
+  background-color: #33C3F0;
+  border-color: #33C3F0; }
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+  color: #FFF;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB; }
+
+  input[type="checkbox"] {
+      background: #fff;
+      height: 16px;
+      width: 16px;
+  }
+
+  input[type="checkbox"]:focus {
+      outline: thin solid #129FEA;
+      outline: 1px auto #129FEA;
+  }
+
+  input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}

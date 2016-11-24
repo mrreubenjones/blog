@@ -13,17 +13,20 @@
 
   <body>
     <div class="background-img">
-      <nav>
-        <%= link_to 'All Posts', root_path %>&middot;
-        <%= link_to 'About', about_path %>&middot;
-        <% if user_signed_in? %>
-            Hello <%= current_user.first_name %>,
-            <%= link_to "Logout", sessions_path, method: :delete %>
-          <% else %>
-            <%= link_to "Login", new_session_path %>&middot;
-            <%= link_to "Sign Up", new_user_path %>
-          <% end %>
-          
+      <nav class="main-nav">
+        <%= link_to 'All Posts', root_path %>
+        <%= link_to 'About', about_path %>
+        <%= link_to 'New category', new_category_path %>
+          <div class="utility-nav">
+            <% if user_signed_in? %>
+              Hello <%= current_user.first_name %>,
+              <%= link_to "Logout", sessions_path, method: :delete %>
+            <% else %>
+              <%= link_to "Login", new_session_path %>
+              <%= link_to "Sign up with Email", new_user_path %>
+              <%= link_to "Sign up with Twitter", twitter_signup_path %>
+            <% end %>
+          </div>
       </nav>
 
       <div class="container <%= @container %>">
@@ -31,6 +34,14 @@
         <%= yield %>
       </div>
     </div>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        var classCycle=['bg-1', 'bg-2', 'bg-3', 'bg-4', 'bg-5', 'bg-6', 'bg-7'];
+        var randomNumber = Math.floor(Math.random() * classCycle.length);
+        var classToAdd = classCycle[randomNumber];
+        $('.background-img').addClass(classToAdd);
+      });
+    </script>
   </body>
 </html>
 

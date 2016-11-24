@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+  # skip_before_action :verify_authenticity_token
   before_action :authenticate_user
 
   def new
@@ -7,12 +7,13 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @post             = Post.find params[:post_id]
+    @post             = Post.friendly.find params[:post_id]
     comment_params    = params.require(:comment).permit(:body)
     @comment          = Comment.new comment_params
     @comment.post     = @post
     @comment.user_id  = current_user.id
     if @comment.save
+      FeedbackMailer.notify_blog_owner(@comment).deliver_now
       redirect_to post_path(@post), notice: "Comment created"
     else
       render "/posts/show"

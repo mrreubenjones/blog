@@ -1,23 +1,31 @@
-<h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
+<div class="post-show-container" id="<%= dom_id(@post) %>">
 
-<% if can? :manage, @post %>
-  <%= link_to "Edit", edit_post_path(@post) %>
-  <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
-<% end %>
-
-<h2>Comments</h2>
-<%= form_for [@post, @comment] do |f| %>
-  <%= f.text_area :body %><br />
-  <%= f.submit 'Comment' %>
-<% end %>
-
-<hr />
-
-<% @comments.each do |c| %>
-  <%= c.body %>&nbsp;&mdash;<%= c.first_name %>&nbsp;
-  <% if can? :destroy, c %>
-    <%= link_to "Delete", comment_path(c), method: :delete %>
+  <% if @post.image.present? %>
+    <%= image_tag @post.image.url %>
   <% end %>
+  <h1><%= @post.title %></h1>
+  <p>Category: <%= @post.category.title %></p>
+  <p><%= @post.body %></p>
+
+  <% if can? :manage, @post %>
+    <%= link_to "Edit", edit_post_path(@post) %>
+    <%= link_to "Delete", post_path(@post), method: :delete, data: {confirm: "Are you sure?"} %>
+  <% end %>
+
+  <h2>Comments</h2>
+  <%= form_for [@post, @comment] do |f| %>
+    <%= f.text_area :body %><br />
+    <%= f.submit 'Comment' %>
+  <% end %>
+
   <hr />
-<% end %>
+
+  <% @comments.each do |c| %>
+    <%= c.body %>&nbsp;&mdash;<%= c.first_name %>&nbsp;
+    <% if can? :destroy, c %>
+      <%= link_to "Delete", comment_path(c), method: :delete %>
+    <% end %>
+    <hr />
+  <% end %>
+
+</div>
