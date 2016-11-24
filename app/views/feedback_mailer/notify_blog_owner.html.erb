@@ -1,0 +1,15 @@
+<h1>Hello <%= @user.full_name %></h1>
+<p>Wow. What an amazing thought. You're a real poet.</p>
+<p>
+  Post Title: <%= @post.title %>
+</p>
+<p>
+  Post Comment: <%= @comment.body %>
+</p>
+<%= link_to 'View the post', post_url(@post) %>
+<p>
+  Regards,
+</p>
+<p>
+  TIL Team.
+</p>

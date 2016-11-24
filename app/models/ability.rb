@@ -4,6 +4,10 @@ class Ability
   def initialize(user)
     user ||= User.new
 
+    can :manage, Category do |category|
+      category.user == user
+    end
+
     can :manage, Post do |post|
       post.user == user
     end
